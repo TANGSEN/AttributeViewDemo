@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class AttributeView;
+
 @protocol AttributeViewDelegate<NSObject>
 @optional
--(void)Attribute_View:(UIView *)view didClickBtnAtBtnTag:(NSInteger)btnTag;
+-(void)Attribute_View:(AttributeView *)view didClickBtn:(UIButton *)btn;
 @end
 
 @interface AttributeView : UIView

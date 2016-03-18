@@ -50,6 +50,7 @@
     [view addSubview:label];
     for (int i = 0; i<texts.count; i++) {
         UIButton *btn = [[UIButton alloc]init];
+        btn.tag = i;
         [btn addTarget:view action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
         NSString *str = texts[i];
@@ -102,9 +103,22 @@
     if (![self.btn isEqual:sender]) {
         self.btn.backgroundColor = [[UIColor lightGrayColor]colorWithAlphaComponent:0.15f];
         self.btn.selected = NO;
+        sender.backgroundColor = AppColor;
+        sender.selected = YES;
+    }else if([self.btn isEqual:sender]){
+        if (sender.selected == YES) {
+            sender.backgroundColor = [[UIColor lightGrayColor]colorWithAlphaComponent:0.15f];
+            sender.selected = NO;
+        }else{
+            sender.backgroundColor = AppColor;
+            sender.selected = YES;
+        }
+    }else{
+        
     }
-    sender.backgroundColor = AppColor;
-    sender.selected = YES;
+    if ([self.Attribute_delegate respondsToSelector:@selector(Attribute_View:didClickBtn:)] ) {
+        [self.Attribute_delegate Attribute_View:self didClickBtn:sender];
+    }
     self.btn = sender;
     
 }
